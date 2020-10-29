@@ -1,0 +1,7 @@
+<textarea rows="6" [value] = " new_post "></textarea>
+
+<!-- another way to manipulate :- <textarea rows="6" [value] = "'temp'"></textarea> -->
+<!-- value is in [] as it is a property and can be only accessed this way-->
+<hr>
+<button (click)= "onAddPost()">save post </button>
+<div>{{new_post}}</div>
