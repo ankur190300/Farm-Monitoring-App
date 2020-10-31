@@ -1,0 +1,18 @@
+
+
+<!--<textarea rows="6" [value] = " new_post " #post_input></textarea> -->
+<!-- another way to manipulate :- <textarea rows="6" [value] = "'temp'"></textarea> -->
+<!-- value is in [] as it is a property and can be only accessed this way-->
+
+<mat-card >
+  <mat-form-field>
+    <textarea matInput rows="6" [value] = " new_post " [(ngModel)] = "entered_text_post"></textarea>
+  </mat-form-field>
+  <button   class="button"  (click)= "onAddPost()">save post </button>
+</mat-card>
+
+
+
+
+
+<div>{{new_post}}</div>

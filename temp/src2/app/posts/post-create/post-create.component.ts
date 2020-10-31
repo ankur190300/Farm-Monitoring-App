@@ -9,13 +9,13 @@ export class PostCreateComponent implements OnInit {
 
   constructor() { }
   new_post = "no content";
-  entered_text_post = "" ;
   ngOnInit(): void {
 
   }
 
   onAddPost(){
-    this.new_post=this.entered_text_post;
+    this.new_post= this.entered_text_post;
+
   }
 
 }
