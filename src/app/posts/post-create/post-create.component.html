@@ -2,18 +2,96 @@
 <!-- another way to manipulate :- <textarea rows="6" [value] = "'temp'"></textarea> -->
 <!-- value is in [] as it is a property and can be only accessed this way-->
 
-<!--<mat-card class= "m-card" > -->
-  <div class= "m-card">
-    <!-- <mat-form-field> -->
-      <textarea matInput rows="6" [value] = " new_post "  [(ngModel)] = "entered_text_post" ></textarea> <!-- [(ngModel)] = "entered_text_post"-->
-    <!-- </mat-form-field> -->
-    <button   class="button"  (click)= "onAddPost()">save post </button>
-  </div>
+<!-- without using from  -->
+<!-- <mat-card class= "m-card" >
 
-<!-- </mat-card> -->
+    <mat-form-field>
+      <input matInput type = "text" [(ngModel)] = "entered_text">
+    </mat-form-field>
+    <mat-form-field >
+
+      <textarea matInput rows="6"   [(ngModel)] = "entered_content" ></textarea>
+
+    </mat-form-field>
+    <button  class="button"  (click)= "onAddPost()">save post </button>
+
+</mat-card> -->
+
+<!-- using forms -->
+<!--post?.title instead of post.title to check if post exists or not -->
+
+<!--This way uses FormsModule instead of ReactiveFormsModule-->
+<!--
+<mat-card class= "m-card" >
+  <mat-spinner *ngIf = "isLoading"></mat-spinner> <!--mat-spinner for loading->
+    <form (submit)= "onSavePost(postForm)" #postForm = "ngForm" *ngIf= "!isLoading"> <!-- don't write (click) instead of (submit)->
+      <mat-form-field>
+        <input matInput
+        type = "text"
+        name = "title"
+        [ngModel] = "post?.title"
+        required
+        minlength="3"
+        #title="ngModel"
+        placeholder="Post Title">
+        <mat-error *ngIf= "title.invalid">Please enter a valid title </mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-stroked-button type = "button" (click)= "filePicker.click()" >Pick Image</button>
+        <input type="file" #filePicker>
+      </div>
+      <mat-form-field >
+
+        <textarea matInput
+        rows="6"
+        name = "content"
+        [ngModel] = "post?.content"
+        required
+         #content="ngModel"
+         placeholder = "Post Content"></textarea>
+
+        <mat-error *ngIf= "content.invalid">Please enter valid content </mat-error>
+      </mat-form-field>
+      <button  mat-raised-button color = "accent" type = "submit" >save post </button>
+    </form>
 
 
+</mat-card> -->
+
+<!-- <div>{{new_post}}</div> -->
+
+<!-- using ReactiveFormsModule-->
+<mat-card class= "m-card" >
+  <mat-spinner *ngIf = "isLoading"></mat-spinner> <!--mat-spinner for loading-->
+    <form [formGroup]= "form" (submit)= "onSavePost()"  *ngIf= "!isLoading"> <!-- don't write (click) instead of (submit)-->
+      <mat-form-field>
+        <input
+        matInput
+        type = "text"
+        formControlName = "title"
+        placeholder="Post Title">
+        <mat-error *ngIf= "form.get('title').invalid">Please enter a valid title </mat-error>
+      </mat-form-field>
+      <div>
+        <!-- Use reactive forms to take it as an input -->
+        <button mat-stroked-button type = "button" (click)= "filePicker.click()" >Pick Image</button>
+        <input type="file" #filePicker (change)= "onImagePicked($event)"> <!--passing event dom using JS-->
+      </div>
+      <div class="image-preview" *ngIf = "imagePreview != '' && imagePreview && form.get('image').valid">
+        <img [src]= "imagePreview" [alt]= "form.value.title">
+      </div>
+      <mat-form-field >
+
+        <textarea
+        matInput
+        rows="6"
+        formControlName="content"
+         placeholder = "Post Content"></textarea>
+
+        <mat-error *ngIf= "form.get('content').invalid">Please enter valid content </mat-error>
+      </mat-form-field>
+      <button  mat-raised-button color = "accent" type = "submit" >save post </button>
+    </form>
 
 
-
-<div>{{new_post}}</div>
+</mat-card>

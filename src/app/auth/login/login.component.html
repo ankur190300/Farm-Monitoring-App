@@ -1,0 +1,42 @@
+<!-- We will used template based approach and not a reactive form as not much customization is needed-->
+
+<mat-card class= "m-card" >
+  <mat-spinner *ngIf = "isLoading"></mat-spinner> <!--mat-spinner for loading-->
+    <form   (submit) ="onLogin(loginForm)" *ngIf= "!isLoading" #loginForm = "ngForm"> <!-- don't write (click) instead of (submit)-->
+      <!-- "ngForm" gives access to the underlying form -->
+      <mat-form-field>
+        <input
+        matInput
+        type = "email"
+        placeholder="E-mail"
+        name="email"
+        ngModel
+        #emailInput="ngModel"
+        required
+        email
+        >
+        <!-- #emailInput gives access to the underlying input through the internal angular model control-->
+        <mat-error *ngIf= "emailInput.invalid">Please enter a valid e-mail </mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field >
+
+        <input
+        matInput
+        type = "password"
+        placeholder="Password"
+        name = "password"
+        ngModel
+        #passwordInput = "ngModel"
+        required
+        possword
+        >
+
+        <mat-error *ngIf= "passwordInput.invalid">Please enter valid password </mat-error>
+      </mat-form-field>
+      <button  mat-raised-button color = "accent" type = "submit" *ngIf= "!isLoading">login </button>
+    </form>
+
+
+</mat-card>

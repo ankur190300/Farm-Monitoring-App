@@ -1,0 +1,25 @@
+<mat-toolbar color = "primary">
+  <span><a routerLink = "/">All posts</a></span><span></span>
+   <span class = "spacer "></span> <!--to seperate all the header elements to left or right -->
+  <ul>
+    <li *ngIf = "userIsAuthenticated">
+      <a mat-button routerLink = "/farm" routerLinkActive= "mat-accent" >Farm Check</a>
+    </li>
+    <li *ngIf = "userIsAuthenticated">
+      <a mat-button routerLink = "/create" routerLinkActive= "mat-accent" >New Post</a>
+    </li>
+    <li *ngIf = "!userIsAuthenticated">
+      <a mat-button routerLink ="/auth/login" routerLinkActive = "mat-accent">Login </a>
+    </li>
+    <li *ngIf = "!userIsAuthenticated">
+      <a mat-button routerLink ="/auth/signup" routerLinkActive = "mat-accent">Sign Up </a>
+    </li>
+    <li  *ngIf = "userIsAuthenticated">
+      <button mat-button (click)= "onLogout()">Logout </button>
+    </li>
+
+  </ul>
+
+</mat-toolbar>
+
+

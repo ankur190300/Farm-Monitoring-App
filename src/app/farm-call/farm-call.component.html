@@ -1,0 +1,22 @@
+<mat-spinner *ngIf = "isLoading"></mat-spinner>
+<div *ngIf= "showbutton">
+  <button class = "preview-button" mat-button mat-raised-button color="accent" (click)= "onRequest()">
+    Fetch Image!
+  </button>
+</div>
+
+
+<img  class = "image-preview" [src]= "imageToShow">
+<table *ngFor= "let i of indexes ">
+    <tr>
+      <td>{{this.animalName[i]}}</td>
+      <td>{{this.animalNumber[i]}}</td>
+    </tr>
+</table>
+<table *ngIf= "totalAnimals !=0"  >
+  <tr>
+    <td>Total</td>
+    <td>{{totalAnimals}}</td>
+  </tr>
+</table>
+
